@@ -1,0 +1,2 @@
+python menage.py runserver
+python menage.py test
