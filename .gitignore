@@ -1,0 +1,7 @@
+__pycache__
+.idea
+*.pyc
+.pytest_cache
+driver
+*.log
+*.sqlite3
