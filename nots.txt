@@ -1,2 +1,3 @@
 python menage.py runserver
 python menage.py test
+python menage.py migrate --noinput
