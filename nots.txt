@@ -1,4 +1,5 @@
 python manage.py runserver
-python manage.py test
-python manage.py test functional_tests
+python manage.py test # all tests
+python manage.py test lists # unit tests
+python manage.py test functional_tests # functional testes
 python manage.py migrate --noinput
