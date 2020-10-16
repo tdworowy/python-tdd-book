@@ -5,3 +5,4 @@ __pycache__
 driver
 *.log
 *.sqlite3
+/static
