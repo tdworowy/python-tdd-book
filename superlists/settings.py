@@ -25,7 +25,7 @@ SECRET_KEY = '937vaj-u=f+-x0+iwpa$4eh6ptuo7k+b)xk3@zf8l(ynf$tkmr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] #hack
 
 
 # Application definition
