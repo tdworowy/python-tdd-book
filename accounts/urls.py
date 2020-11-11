@@ -1,8 +1,9 @@
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 from accounts import views
 
 urlpatterns = [
-    path('send_email', views.send_login_email, name='send_login_email'),
+    path('send_login_email', views.send_login_email, name='send_login_email'),
     path('login', views.login, name='login'),
-    path('logout', views.send_login_email, name='logout'),
+    path('logout', LogoutView, {'next_page': '/'}, name='logout'),
 ]

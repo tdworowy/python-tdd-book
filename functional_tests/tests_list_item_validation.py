@@ -6,7 +6,6 @@ import time
 import os
 from functional_tests.base import FunctionalTest
 
-
 # TODO need refactor
 
 
@@ -79,8 +78,7 @@ class ItemValidationTest(FunctionalTest):
                           self.get_error_element().is_displayed()
                       ))
 
-        self.get_item_input_box().send_keys('a')
-
+        self.get_item_input_box().send_keys('a') #TODO Don't work
         self.wait_for(lambda:
                       self.assertFalse(
                           self.get_error_element().is_displayed()

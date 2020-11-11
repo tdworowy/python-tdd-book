@@ -9,6 +9,7 @@ import os
 # TODO need refactor
 
 class FunctionalTest(StaticLiveServerTestCase):
+
     MAX_WAIT = 10
     DRIVER_PATH = "driver/geckodriver.exe"
 
@@ -32,7 +33,7 @@ class FunctionalTest(StaticLiveServerTestCase):
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > self.MAX_WAIT:
                     raise e
-                time.sleep(0.1)
+                time.sleep(0.3)
 
     def wait_for(self, fn):
         start_time = time.time()
@@ -42,7 +43,7 @@ class FunctionalTest(StaticLiveServerTestCase):
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > self.MAX_WAIT:
                     raise e
-                time.sleep(0.1)
+                time.sleep(0.3)
 
     def get_item_input_box(self):
         return self.browser.find_element_by_id('id_text')
