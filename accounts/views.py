@@ -1,20 +1,17 @@
-from django.shortcuts import render, redirect
-import uuid
-import sys
-from django.contrib import auth
-from django.contrib.auth import login as auth_login, logout as auth_logout
+from django.contrib import auth, messages
 from django.core.mail import send_mail
+
+from django.shortcuts import redirect
 from django.urls import reverse
 
 from accounts.models import Token
-from django.contrib import messages
 
 
 def send_login_email(request):
     email = request.POST['email']
     token = Token.objects.create(email=email)
     url = request.build_absolute_uri(
-        reverse('login') + '?token=' + str(token.uid)
+        reverse('accounts:login') + '?token=' + str(token.uid)
     )
     message_body = f'Use this link to log in:\n\n{url}'
     send_mail(

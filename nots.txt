@@ -5,6 +5,9 @@ python manage.py test functional_tests # functional testes
 python manage.py migrate --noinput
 python manage.py collectstatic
 
+python manage.py makemigrations lists
+python manage.py makemigrations accounts
+
 to run functional tests on stagiong env(use git bash)
     STAGING_SERVER=superlists-staging.pl:8000 (url) python manage.py test functional_test
 
