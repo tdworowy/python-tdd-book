@@ -1,3 +1,4 @@
+import os
 import random
 from fabric import Connection
 
@@ -42,7 +43,8 @@ def _create_or_update_dotenv():
             'abcdefghijklmnopqrstuvwxyz0123456789', k=50
         ))
         conn.append('.env', f'DJANGO_SECRET_KEY={new_secret}')
-
+        email_password = os.environ['EMAIL_PASSWORD']
+        conn.append('.env', f'EMAIL_PASSWORD={email_password}')
 
 def _update_static_files():
     conn.run('./virtualenv/bin/python manage.py collectstatic --noinput')
