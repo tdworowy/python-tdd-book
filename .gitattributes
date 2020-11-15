@@ -1,2 +1,2 @@
 lists/static/jquery-3.5.1.min.js linguist-vendored=true
-lists/static/bootstrap/**/* linguist-vendored=true
+lists/static/bootstrap/** linguist-vendored=true
