@@ -1,10 +1,6 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
 from functional_tests.base import FunctionalTest
-
-
-# TODO need refactor
 
 
 class NewVisitorTest(FunctionalTest):
@@ -18,14 +14,8 @@ class NewVisitorTest(FunctionalTest):
         input_box = self.get_item_input_box()
         self.assertEqual(input_box.get_attribute('placeholder'), 'Enter a to-do item')
 
-        input_box.send_keys('Buy peacock feathers')
-        input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
-
-        input_box = self.get_item_input_box()
-        input_box.send_keys('Use peacock feathers to make a fly')
-        input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
+        self.add_list_item('Buy peacock feathers')
+        self.add_list_item('Use peacock feathers to make a fly')
 
     def test_can_start_a_list_for_multiple_users(self):
         self.browser.get(self.live_server_url)
@@ -33,14 +23,8 @@ class NewVisitorTest(FunctionalTest):
         input_box = self.get_item_input_box()
         self.assertEqual(input_box.get_attribute('placeholder'), 'Enter a to-do item')
 
-        input_box.send_keys('Buy peacock feathers')
-        input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
-
-        input_box = self.get_item_input_box()
-        input_box.send_keys('Use peacock feathers to make a fly')
-        input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
+        self.add_list_item('Buy peacock feathers')
+        self.add_list_item('Use peacock feathers to make a fly')
 
         list_url1 = self.browser.current_url
         self.assertRegex(list_url1, '/lists/.+')
@@ -56,9 +40,7 @@ class NewVisitorTest(FunctionalTest):
         input_box = self.get_item_input_box()
         self.assertEqual(input_box.get_attribute('placeholder'), 'Enter a to-do item')
 
-        input_box.send_keys('Buy milk')
-        input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy milk')
+        self.add_list_item('Buy milk')
 
         list_url2 = self.browser.current_url
         self.assertRegex(list_url2, '/lists/.+')

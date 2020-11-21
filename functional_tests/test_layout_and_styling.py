@@ -1,8 +1,4 @@
-from selenium.webdriver.common.keys import Keys
 from functional_tests.base import FunctionalTest
-
-
-# TODO need refactor
 
 
 class LayoutAndStylingTest(FunctionalTest):
@@ -13,9 +9,7 @@ class LayoutAndStylingTest(FunctionalTest):
         input_box = self.get_item_input_box()
         self.assertAlmostEqual(input_box.location['x'] + input_box.size['width'] / 2, 300, delta=100)
 
-        input_box.send_keys("testing")
-        input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: testing')
+        self.add_list_item("testing")
 
         input_box = self.get_item_input_box()
         self.assertAlmostEqual(input_box.location['x'] + input_box.size['width'] / 2, 300, delta=100)
