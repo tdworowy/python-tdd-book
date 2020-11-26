@@ -6,3 +6,4 @@ driver
 *.log
 *.sqlite3
 /static
+screen_dumps
