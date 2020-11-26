@@ -27,3 +27,5 @@ deployment (django dev server):
 
 
 set EMAIL_PASSWORD=
+
+phantomjs runner.js tests.html (z lists/static/tests)
