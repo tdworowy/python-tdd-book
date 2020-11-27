@@ -19,6 +19,7 @@ class SharingTest(FunctionalTest):
 
         oni_browser = webdriver.Firefox(executable_path=self.DRIVER_PATH)
         self.addCleanup(lambda: quit_if_possible(oni_browser))
+        self.browser = oni_browser
         self.create_pre_authenticated_session('oniciferous@example.com')
 
         self.browser = edith_browser
@@ -28,13 +29,13 @@ class SharingTest(FunctionalTest):
 
         share_box = list_page.get_share_box()
         self.assertEqual(
-            share_box.get_attribute('placeholder'), 'yourfriend@example.com'
+            share_box.get_attribute('placeholder'), 'your-friend@example.com'
         )
-
         list_page.share_list_with('oniciferous@example.com')
 
-        MyListsPage(self).go_to_my_lists_page()
-        self.browser.find_elements_by_link_text('Get help').click()
+        self.browser = oni_browser
+        my_lists = MyListsPage(self).go_to_my_lists_page()
+        my_lists.open_list('Get help')
 
         self.wait_for(lambda: self.assertEqual(
             list_page.get_list_owner(), 'edith@example.com'
