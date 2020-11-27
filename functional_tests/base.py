@@ -90,7 +90,6 @@ class FunctionalTest(StaticLiveServerTestCase):
             value=session_key, path='/'
         ))
 
-
     @wait
     def wait_for(self, fn):
         return fn()
