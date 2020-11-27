@@ -1,6 +1,7 @@
 from selenium import webdriver
 from .base import FunctionalTest
 from .list_page import ListPage
+from .my_list_page import MyListsPage
 
 
 def quit_if_possible(browser):
@@ -30,4 +31,17 @@ class SharingTest(FunctionalTest):
             share_box.get_attribute('placeholder'), 'yourfriend@example.com'
         )
 
-        list_page.share_list_witch('oniciferous@example.com')
+        list_page.share_list_with('oniciferous@example.com')
+
+        MyListsPage(self).go_to_my_lists_page()
+        self.browser.find_elements_by_link_text('Get help').click()
+
+        self.wait_for(lambda: self.assertEqual(
+            list_page.get_list_owner(), 'edith@example.com'
+        ))
+
+        list_page.add_list_item('Hi Edith!')
+
+        self.browser = edith_browser
+        self.browser.refresh()
+        list_page.wait_for_row_in_list_table('Hi Edith!', 2)

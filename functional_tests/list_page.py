@@ -46,3 +46,27 @@ class ListPage:
 
         self.wait_for_row_in_list_table(item_text, new_item_no)
         return self
+
+    def get_list_owner(self) -> str:
+        return self.test.browser.find_element_by_id('id_list_owner').text
+
+    @wait
+    def enter_email(self, email):
+        self.test.browser.find_element_by_name('email').send_keys(email)
+        self.test.browser.find_element_by_name('email').send_keys(Keys.ENTER)
+        self.test.assertIn( 'Check your email', self.test.browser.find_element_by_tag_name('body').text)
+
+    def log_out(self):
+        self.test.browser.find_element_by_link_text('Log out').click()
+
+    @wait
+    def wait_to_be_logged_in(self, email):
+        self.test.browser.find_element_by_link_text('Log out')
+        navbar = self.test.browser.find_element_by_css_selector('.navbar')
+        self.test.assertIn(email, navbar.text)
+
+    @wait
+    def wait_to_be_logged_out(self, email):
+        self.test.browser.find_element_by_name('email')
+        navbar = self.test.browser.find_element_by_css_selector('.navbar')
+        self.test.assertNotIn(email, navbar.text)
