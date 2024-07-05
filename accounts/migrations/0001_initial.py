@@ -8,22 +8,34 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('email', models.EmailField(max_length=254, primary_key=True, serialize=False)),
+                (
+                    "email",
+                    models.EmailField(
+                        max_length=254, primary_key=True, serialize=False
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Token',
+            name="Token",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254)),
-                ('uid', models.CharField(default=uuid.uuid4, max_length=40)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("email", models.EmailField(max_length=254)),
+                ("uid", models.CharField(default=uuid.uuid4, max_length=40)),
             ],
         ),
     ]

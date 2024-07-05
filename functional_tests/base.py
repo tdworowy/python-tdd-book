@@ -13,7 +13,7 @@ from .server_tools import create_session_on_server, reset_database
 MAX_WAIT = 10
 
 SCREEN_DUMP_LOCATION = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), 'screen_dumps'
+    os.path.dirname(os.path.abspath(__file__)), "screen_dumps"
 )
 
 
@@ -58,24 +58,24 @@ class FunctionalTest(StaticLiveServerTestCase):
         return any(error for (method, error) in self._outcome.errors)
 
     def take_screenshot(self):
-        file_name = self._get_filename() + '.png'
-        print('screenshotting to', file_name)
+        file_name = self._get_filename() + ".png"
+        print("screenshotting to", file_name)
         self.browser.get_screenshot_as_file(file_name)
 
     def dump_html(self):
-        file_name = self._get_filename() + '.html'
-        print('dumping page HTML to', file_name)
-        with open(file_name, 'w') as f:
+        file_name = self._get_filename() + ".html"
+        print("dumping page HTML to", file_name)
+        with open(file_name, "w") as f:
             f.write(self.browser.page_source)
 
     def _get_filename(self):
-        timestamp = datetime.now().isoformat().replace(':', '.')[:19]
-        return '{folder}/{classname}.{method}-window{windowid}-{timestamp}'.format(
+        timestamp = datetime.now().isoformat().replace(":", ".")[:19]
+        return "{folder}/{classname}.{method}-window{windowid}-{timestamp}".format(
             folder=SCREEN_DUMP_LOCATION,
             classname=self.__class__.__name__,
             method=self._testMethodName,
             windowid=self._windowid,
-            timestamp=timestamp
+            timestamp=timestamp,
         )
 
     def create_pre_authenticated_session(self, email):
@@ -85,10 +85,9 @@ class FunctionalTest(StaticLiveServerTestCase):
             session_key = create_pre_authenticated_session(email)
 
         self.browser.get(self.live_server_url + "/404_not_such_url/")
-        self.browser.add_cookie(dict(
-            name=settings.SESSION_COOKIE_NAME,
-            value=session_key, path='/'
-        ))
+        self.browser.add_cookie(
+            dict(name=settings.SESSION_COOKIE_NAME, value=session_key, path="/")
+        )
 
     @wait
     def wait_for(self, fn):

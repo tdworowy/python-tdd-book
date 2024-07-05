@@ -9,9 +9,13 @@ class LayoutAndStylingTest(FunctionalTest):
         list_page = ListPage(self)
 
         input_box = list_page.get_item_input_box()
-        self.assertAlmostEqual(input_box.location['x'] + input_box.size['width'] / 2, 300, delta=100)
+        self.assertAlmostEqual(
+            input_box.location["x"] + input_box.size["width"] / 2, 300, delta=100
+        )
 
         list_page.add_list_item("testing")
 
         input_box = list_page.get_item_input_box()
-        self.assertAlmostEqual(input_box.location['x'] + input_box.size['width'] / 2, 300, delta=100)
+        self.assertAlmostEqual(
+            input_box.location["x"] + input_box.size["width"] / 2, 300, delta=100
+        )

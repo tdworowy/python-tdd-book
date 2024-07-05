@@ -8,27 +8,23 @@ from accounts.models import Token
 
 
 def send_login_email(request):
-    email = request.POST['email']
+    email = request.POST["email"]
     token = Token.objects.create(email=email)
     url = request.build_absolute_uri(
-        reverse('accounts:login') + '?token=' + str(token.uid)
+        reverse("accounts:login") + "?token=" + str(token.uid)
     )
-    message_body = f'Use this link to log in:\n\n{url}'
+    message_body = f"Use this link to log in:\n\n{url}"
     send_mail(
-        'Your login link for Superlists',
-        message_body,
-        'noreplay@superlists',
-        [email]
+        "Your login link for Superlists", message_body, "noreplay@superlists", [email]
     )
     messages.success(
-        request,
-        "Check your email, we've sent you a link you can use to log in."
+        request, "Check your email, we've sent you a link you can use to log in."
     )
-    return redirect('/')
+    return redirect("/")
 
 
 def login(request):
-    user = auth.authenticate(uid=request.GET.get('token'))
+    user = auth.authenticate(uid=request.GET.get("token"))
     if user:
         auth.login(request, user)
-    return redirect('/')
+    return redirect("/")

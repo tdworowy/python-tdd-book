@@ -13,36 +13,36 @@ def quit_if_possible(browser):
 
 class SharingTest(FunctionalTest):
     def test_can_share_a_list_witch_another_user(self):
-        self.create_pre_authenticated_session('edith@example.com')
+        self.create_pre_authenticated_session("edith@example.com")
         edith_browser = self.browser
         self.addCleanup(lambda: quit_if_possible(edith_browser))
 
         oni_browser = webdriver.Firefox(executable_path=self.DRIVER_PATH)
         self.addCleanup(lambda: quit_if_possible(oni_browser))
         self.browser = oni_browser
-        self.create_pre_authenticated_session('oniciferous@example.com')
+        self.create_pre_authenticated_session("oniciferous@example.com")
 
         self.browser = edith_browser
         self.browser.get(self.live_server_url)
         list_page = ListPage(self)
-        list_page.add_list_item('Get help')
+        list_page.add_list_item("Get help")
 
         share_box = list_page.get_share_box()
         self.assertEqual(
-            share_box.get_attribute('placeholder'), 'your-friend@example.com'
+            share_box.get_attribute("placeholder"), "your-friend@example.com"
         )
-        list_page.share_list_with('oniciferous@example.com')
+        list_page.share_list_with("oniciferous@example.com")
 
         self.browser = oni_browser
         my_lists = MyListsPage(self).go_to_my_lists_page()
-        my_lists.open_list('Get help')
+        my_lists.open_list("Get help")
 
-        self.wait_for(lambda: self.assertEqual(
-            list_page.get_list_owner(), 'edith@example.com'
-        ))
+        self.wait_for(
+            lambda: self.assertEqual(list_page.get_list_owner(), "edith@example.com")
+        )
 
-        list_page.add_list_item('Hi Edith!')
+        list_page.add_list_item("Hi Edith!")
 
         self.browser = edith_browser
         self.browser.refresh()
-        list_page.wait_for_row_in_list_table('Hi Edith!', 2)
+        list_page.wait_for_row_in_list_table("Hi Edith!", 2)
